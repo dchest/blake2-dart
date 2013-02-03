@@ -65,6 +65,9 @@ class BLAKE2s implements Hash {
   _rotr32(x, n) => (x >> n) | ((x << (32 - n)) & _MASK_32);
   _add32(x, y) => (x + y) & _MASK_32;
 
+  /**
+   *  Construct BLAKE2s hasher object, calculating hash of size [digestLength].
+   */
   BLAKE2s({int digestLength : 32, List<int> key : null, List<int> salt : null,
     List<int> person : null, Tree tree : null}) {
     _digestLength = digestLength;

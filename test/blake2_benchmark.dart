@@ -5,34 +5,33 @@
 // worldwide. This software is distributed without any warranty.
 // http://creativecommons.org/publicdomain/zero/1.0/
 
-import "dart:crypto";
-import "../lib/blake2s.dart";
+import 'dart:crypto';
+import '../lib/blake2s.dart';
 
 final MEGABYTE = 1024*1024;
 
 measure(name, fn) {
   var stopWatch = new Stopwatch()..start();
   var bytes = fn();
-  print("${name} ${stopWatch.elapsedMilliseconds/1000}s per ${bytes/MEGABYTE} MB");
+  var megabytesPerSecond = (bytes/MEGABYTE) / (stopWatch.elapsedMilliseconds/1000);
+  print("${name} ${megabytesPerSecond} MB/s");
+}
+
+measureHash(name, hash) {
+  var zeros = new List.fixedLength(128, fill: 0);
+  measure("BLAKE-2s", () {
+    var zlen = zeros.length;
+    var i;
+    for (i = 0; i < 2*MEGABYTE; i += zlen) {
+      hash.add(zeros);
+    }
+    hash.close();
+    return i;
+  });
 }
 
 main() {
   print("Running...");
-
-  var zeroes = [];
-  zeroes.insertRange(0, 1*MEGABYTE, 0);
-
-  measure("BLAKE-2s", () {
-    var blake = new BLAKE2s();
-    blake.add(zeroes);
-    blake.close();
-    return zeroes.length;
-  });
-
-  measure("SHA-256", () {
-    var sha = new SHA256();
-    sha.add(zeroes);
-    sha.close();
-    return zeroes.length;
-  });
+  measureHash("BLAKE-2s", new BLAKE2s());
+  measureHash("SHA-256", new SHA256());
 }
