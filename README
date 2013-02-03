@@ -8,7 +8,7 @@ mode; see constructor declaration.
 EXAMPLE
 
 	var h = new BLAKE2s();
-	h.add(encodeUtf8("I want to hash this string"))
+	h.add(encodeUtf8("I want to hash this string"));
 	var digest = h.close();
 	print(CryptoUtils.bytesToHex(digest));
 
