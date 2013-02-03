@@ -34,6 +34,14 @@ class Tree {
     _maxInnerHashSize = 32;
   }
 
+  // Returns an instance of tree configuration for BLAKE2b.
+  Tree.BLAKE2b() {
+    // Do not limit nodeOffset (which must be limited
+    // to 2^64-1) for JavaScript compatibility.
+    _maxNodeOffset = -1;
+    _maxInnerHashSize = 64;
+  }
+
   set fanout(int n) {
     if (n < 0 || n == 1 || n > 255) {
       throw new HashException('Incorrect fanout');
@@ -56,7 +64,7 @@ class Tree {
   }
 
   set nodeOffset(int n) {
-    if (n < 0 || n > _maxNodeOffset) {
+    if (n < 0 || (_maxNodeOffset > 0 && n > _maxNodeOffset)) {
       throw new HashException('Incorrect nodeOffset');
     }
     _nodeOffset = n;
