@@ -31,7 +31,7 @@ measureHash(name, hash) {
 }
 
 main() {
-  print("Running...");
-  measureHash("BLAKE-2s", new BLAKE2s());
-  measureHash("SHA-256", new SHA256());
+  print('Running...');
+  measureHash('BLAKE-2s', new BLAKE2s());
+  measureHash('SHA-256', new SHA256());
 }

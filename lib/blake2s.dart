@@ -6,7 +6,7 @@
 // http://creativecommons.org/publicdomain/zero/1.0/
 
 library blake2;
-import "dart:crypto";
+import 'dart:crypto';
 
 class BLAKE2s implements Hash {
 
@@ -88,22 +88,22 @@ class BLAKE2s implements Hash {
     _pendingData = [];
 
     if (_digestLength < 1 || _digestLength > 32) {
-      throw new HashException("Wrong digest length");
+      throw new HashException('Wrong digest length');
     }
 
     var keyLength = _key == null ? 0 : _key.length;
     if (keyLength > 32) {
-      throw new HashException("Wrong key length");
+      throw new HashException('Wrong key length');
     }
 
     var saltLength = _salt == null ? 0 : _salt.length;
     if (saltLength > 0 && saltLength != 8) {
-      throw new HashException("Wrong salt length");
+      throw new HashException('Wrong salt length');
     }
 
     var personLength = _person == null ? 0 : _person.length;
     if (personLength > 0 && personLength != 8) {
-      throw new HashException("Wrong personalization length");
+      throw new HashException('Wrong personalization length');
     }
 
     // Create parameter block.
@@ -186,6 +186,7 @@ class BLAKE2s implements Hash {
     _v[14] ^= _f[0];
     _v[15] ^= _f[1];
 
+    // Rounds.
     for (var round = 0; round < _ROUNDS; round++) {
       _G(round, 0, 4,  8, 12,  0);
       _G(round, 1, 5,  9, 13,  2);
@@ -322,42 +323,42 @@ class Tree {
 
   set fanout(int n) {
     if (n < 0 || n == 1 || n > 255) {
-      throw new HashException("Incorrect fanout");
+      throw new HashException('Incorrect fanout');
     }
     _fanout = n;
   }
 
   set maxDepth(int n) {
     if (n < 2 || n > 255) {
-      throw new HashException("Incorrect maxDepth");
+      throw new HashException('Incorrect maxDepth');
     }
     _maxDepth = n;
   }
 
   set leafSize(int n) {
     if (n < 0 || n > 0xffffffff) {
-      throw new HashException("Incorrect leafSize");
+      throw new HashException('Incorrect leafSize');
     }
     _leafSize = n;
   }
 
   set nodeOffset(int n) {
     if (n < 0 || n > _maxNodeOffset) {
-      throw new HashException("Incorrect nodeOffset");
+      throw new HashException('Incorrect nodeOffset');
     }
     _nodeOffset = n;
   }
 
   set nodeDepth(int n) {
     if (n < 0 || n > 255) {
-      throw new HashException("Incorrect nodeDepth");
+      throw new HashException('Incorrect nodeDepth');
     }
     _nodeDepth = n;
   }
 
   set innerHashSize(int n) {
     if (n < 1 || n > _maxInnerHashSize) {
-      throw new HashException("Incorrect innerHashSize");
+      throw new HashException('Incorrect innerHashSize');
     }
     _innerHashSize = n;
   }

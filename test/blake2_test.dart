@@ -5,13 +5,13 @@
 // worldwide. This software is distributed without any warranty.
 // http://creativecommons.org/publicdomain/zero/1.0/
 
-import "dart:crypto";
+import 'dart:crypto';
 
 import 'package:unittest/unittest.dart';
-import "../lib/blake2s.dart";
+import '../lib/blake2s.dart';
 
 main() {
-  test("BLAKE2s", () {
+  test('BLAKE2s', () {
     var golden = [
       "69217a3079908094e11121d042354a7c1f55b6482ca1a51e1b250dfd1ed0eef9",
       "e34d74dbaf4ff4c6abd871cc220451d2ea2648846c7757fbaac82fe51ad64bea",

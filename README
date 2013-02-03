@@ -7,6 +7,10 @@ mode; see constructor declaration.
 
 EXAMPLE
 
+	import 'dart:crypto';
+	import 'dart:utf';
+	import 'package:blake2/blake2s.dart';
+
 	var h = new BLAKE2s();
 	h.add(encodeUtf8("I want to hash this string"));
 	var digest = h.close();
