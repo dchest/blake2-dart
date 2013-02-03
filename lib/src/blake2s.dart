@@ -106,7 +106,8 @@ class BLAKE2s implements Hash {
     }
 
     // Create parameter block.
-    var parameterBlock = new List.fixedLength(blockSize~/2, fill: 0);
+    var parameterBlock = new List.fixedLength(_h.length * _BYTES_PER_WORD,
+                                              fill: 0);
     parameterBlock[0] = digestLength;
     parameterBlock[1] = keyLength;
     if (_salt != null) {
