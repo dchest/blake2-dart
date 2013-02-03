@@ -31,10 +31,10 @@ class BLAKE2s implements Hash {
 
   // Parameters.
   int _digestLength;
-  HashTreeConfig _tree;
   List<int> _key;
   List<int> _salt;
   List<int> _person;
+  HashTreeConfig _tree;
 
   int get digestLength => _digestLength;
 
