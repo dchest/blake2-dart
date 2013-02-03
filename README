@@ -1,0 +1,28 @@
+Dart implementation of BLAKE2 cryptographic hash function.
+
+(Currently implements BLAKE2s variant.)
+
+Supports variable length digests, keying mode, salt, personalization, and tree
+mode; see constructor declaration.
+
+EXAMPLE
+
+	var h = new BLAKE2s();
+	h.add(encodeUtf8("I want to hash this string"))
+	var digest = h.close();
+	print(CryptoUtils.bytesToHex(digest));
+
+TODO
+
+Documentation, publication on pub.dartlang.org.
+
+
+PUBLIC DOMAIN DEDICATION
+
+Written in 2013 by Dmitry Chestnykh.
+
+To the extent possible under law, the author have dedicated all copyright
+and related and neighboring rights to this software to the public domain
+worldwide. This software is distributed without any warranty.
+http://creativecommons.org/publicdomain/zero/1.0/
+
