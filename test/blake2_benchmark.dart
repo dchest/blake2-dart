@@ -19,7 +19,7 @@ measure(name, fn) {
 
 measureHash(name, hash) {
   var zeros = new List.fixedLength(128, fill: 0);
-  measure("BLAKE-2s", () {
+  measure(name, () {
     var zlen = zeros.length;
     var i;
     for (i = 0; i < 2*MEBIBYTE; i += zlen) {
