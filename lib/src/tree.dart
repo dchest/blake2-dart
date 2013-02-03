@@ -30,7 +30,7 @@ class Tree {
 
   // Returns an instance of tree configuration for BLAKE2s.
   Tree.BLAKE2s() {
-    _maxNodeOffset = (1<<48)-1;
+    _maxNodeOffset = 281474976710655; // 2^48-1
     _maxInnerHashSize = 32;
   }
 
