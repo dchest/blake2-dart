@@ -18,7 +18,10 @@ EXAMPLE
 
 TODO
 
-Documentation, publication on pub.dartlang.org.
+	- documentation
+	- BLAKE2b
+	- tests for tree mode
+	- publication on pub.dartlang.org.
 
 
 PUBLIC DOMAIN DEDICATION
