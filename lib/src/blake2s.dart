@@ -141,7 +141,7 @@ class BLAKE2s implements Hash {
 
     // XOR parameter block into initial chain value.
     var paramWords = new List.fixedLength(_h.length, fill: 0);
-    _bytesToWords(parameterBlock, 0, paramWords,_h.length);
+    _bytesToWords(parameterBlock, 0, paramWords, _h.length);
 
     for (int i = 0; i < _h.length; i++) {
       _h[i] ^= paramWords[i];
@@ -157,11 +157,11 @@ class BLAKE2s implements Hash {
 
   BLAKE2s newInstance() {
     return new BLAKE2s(
-        digestLength : _digestLength,
-        key  : _key,
-        salt : _salt,
-        person : _person,
-        tree : _tree
+        digestLength: _digestLength,
+        key: _key,
+        salt: _salt,
+        person: _person,
+        tree: _tree
     );
   }
 
