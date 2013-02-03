@@ -2,7 +2,7 @@ Dart implementation of BLAKE2 cryptographic hash function.
 
 (Currently implements BLAKE2s variant.)
 
-Supports variable length digests, keying mode, salt, personalization, and tree
+Supports variable length digests, keying, salt, personalization, and tree
 mode; see constructor declaration.
 
 EXAMPLE
