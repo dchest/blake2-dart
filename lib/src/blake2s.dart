@@ -31,7 +31,7 @@ class BLAKE2s implements Hash {
 
   // Parameters.
   int _digestLength;
-  Tree _tree;
+  HashTreeConfig _tree;
   List<int> _key;
   List<int> _salt;
   List<int> _person;
@@ -68,7 +68,7 @@ class BLAKE2s implements Hash {
    *  Construct BLAKE2s hasher object, calculating hash of size [digestLength].
    */
   BLAKE2s({int digestLength : 32, List<int> key : null, List<int> salt : null,
-    List<int> person : null, Tree tree : null}) {
+    List<int> person : null, HashTreeConfig tree : null}) {
     _digestLength = digestLength;
     _key = key;
     _salt = salt;

@@ -8,7 +8,7 @@
 part of blake2;
 
 // Configuration for tree mode.
-class Tree {
+class HashTreeConfig {
   int _fanout;
   int _maxDepth;
   int _leafSize;
@@ -29,13 +29,13 @@ class Tree {
   int get innerHashSize => _innerHashSize;
 
   // Returns an instance of tree configuration for BLAKE2s.
-  Tree.BLAKE2s() {
+  HashTreeConfig.BLAKE2s() {
     _maxNodeOffset = 281474976710655; // 2^48-1
     _maxInnerHashSize = 32;
   }
 
   // Returns an instance of tree configuration for BLAKE2b.
-  Tree.BLAKE2b() {
+  HashTreeConfig.BLAKE2b() {
     // Do not limit nodeOffset (which must be limited
     // to 2^64-1) for JavaScript compatibility.
     _maxNodeOffset = -1;
