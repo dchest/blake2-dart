@@ -5,8 +5,7 @@
 // worldwide. This software is distributed without any warranty.
 // http://creativecommons.org/publicdomain/zero/1.0/
 
-library blake2;
-import 'dart:crypto';
+part of blake2;
 
 class BLAKE2s implements Hash {
 
@@ -291,75 +290,5 @@ class BLAKE2s implements Hash {
     bytes[2] = (word >> 16) & _MASK_8;
     bytes[3] = (word >> 24) & _MASK_8;
     return bytes;
-  }
-}
-
-// Configuration for tree mode.
-class Tree {
-  int _fanout;
-  int _maxDepth;
-  int _leafSize;
-  int _nodeOffset;
-  int _nodeDepth;
-  int _innerHashSize;
-
-  int _maxNodeOffset;
-  int _maxInnerHashSize;
-
-  bool isLastNode;
-
-  int get fanout => _fanout;
-  int get maxDepth => _maxDepth;
-  int get leafSize => _leafSize;
-  int get nodeOffset => _nodeOffset;
-  int get nodeDepth => _nodeDepth;
-  int get innerHashSize => _innerHashSize;
-
-  // Returns an instance of tree configuration for BLAKE2s.
-  Tree.BLAKE2s() {
-    _maxNodeOffset = (1<<48)-1;
-    _maxInnerHashSize = 32;
-  }
-
-  set fanout(int n) {
-    if (n < 0 || n == 1 || n > 255) {
-      throw new HashException('Incorrect fanout');
-    }
-    _fanout = n;
-  }
-
-  set maxDepth(int n) {
-    if (n < 2 || n > 255) {
-      throw new HashException('Incorrect maxDepth');
-    }
-    _maxDepth = n;
-  }
-
-  set leafSize(int n) {
-    if (n < 0 || n > 0xffffffff) {
-      throw new HashException('Incorrect leafSize');
-    }
-    _leafSize = n;
-  }
-
-  set nodeOffset(int n) {
-    if (n < 0 || n > _maxNodeOffset) {
-      throw new HashException('Incorrect nodeOffset');
-    }
-    _nodeOffset = n;
-  }
-
-  set nodeDepth(int n) {
-    if (n < 0 || n > 255) {
-      throw new HashException('Incorrect nodeDepth');
-    }
-    _nodeDepth = n;
-  }
-
-  set innerHashSize(int n) {
-    if (n < 1 || n > _maxInnerHashSize) {
-      throw new HashException('Incorrect innerHashSize');
-    }
-    _innerHashSize = n;
   }
 }

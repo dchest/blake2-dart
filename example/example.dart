@@ -1,6 +1,6 @@
 import 'dart:crypto';
 import 'dart:utf';
-import '../lib/blake2s.dart';
+import '../lib/blake2.dart';
 
 main() {
   var h = new BLAKE2s();

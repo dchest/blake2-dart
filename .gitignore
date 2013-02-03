@@ -2,3 +2,4 @@
 .children
 pubspec.lock
 packages/
+example/packages/

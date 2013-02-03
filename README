@@ -9,7 +9,7 @@ EXAMPLE
 
 	import 'dart:crypto';
 	import 'dart:utf';
-	import 'package:blake2/blake2s.dart';
+	import 'package:blake2/blake2.dart';
 
 	var h = new BLAKE2s();
 	h.add(encodeUtf8("I want to hash this string"));

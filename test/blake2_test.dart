@@ -8,7 +8,7 @@
 import 'dart:crypto';
 
 import 'package:unittest/unittest.dart';
-import '../lib/blake2s.dart';
+import '../lib/blake2.dart';
 
 main() {
   test('BLAKE2s', () {

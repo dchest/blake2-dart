@@ -6,7 +6,7 @@
 // http://creativecommons.org/publicdomain/zero/1.0/
 
 import 'dart:crypto';
-import '../lib/blake2s.dart';
+import '../lib/blake2.dart';
 
 const MEBIBYTE = 1024*1024;
 
