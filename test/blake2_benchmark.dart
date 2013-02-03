@@ -8,13 +8,13 @@
 import 'dart:crypto';
 import '../lib/blake2s.dart';
 
-final MEGABYTE = 1024*1024;
+const MEBIBYTE = 1024*1024;
 
 measure(name, fn) {
   var stopWatch = new Stopwatch()..start();
   var bytes = fn();
-  var megabytesPerSecond = (bytes/MEGABYTE) / (stopWatch.elapsedMilliseconds/1000);
-  print("${name} ${megabytesPerSecond} MB/s");
+  var mebibytesPerSecond = (bytes/MEBIBYTE) / (stopWatch.elapsedMilliseconds/1000);
+  print("${name} ${mebibytesPerSecond} MiB/s");
 }
 
 measureHash(name, hash) {
@@ -22,7 +22,7 @@ measureHash(name, hash) {
   measure("BLAKE-2s", () {
     var zlen = zeros.length;
     var i;
-    for (i = 0; i < 2*MEGABYTE; i += zlen) {
+    for (i = 0; i < 2*MEBIBYTE; i += zlen) {
       hash.add(zeros);
     }
     hash.close();
