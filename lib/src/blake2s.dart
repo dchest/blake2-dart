@@ -218,7 +218,7 @@ class BLAKE2s implements Hash {
   _incrementCounter(int n) {
     if (n == 0) return;
     _t[0] = _add32(_t[0], n);
-    if (_t[0] == 0) _t[1]++;
+    if (_t[0] < n) _t[1]++;
   }
 
   _iterate() {
