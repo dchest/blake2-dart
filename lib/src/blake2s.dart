@@ -281,7 +281,7 @@ class BLAKE2s implements Hash {
 
   // Convert a 32-bit word to four bytes (little endian).
   _wordToBytes(int word) {
-    List<int> bytes = new List(_BYTES_PER_WORD);
+    List<int> bytes = new List.fixedLength(_BYTES_PER_WORD);
     bytes[0] = (word >> 0) & _MASK_8;
     bytes[1] = (word >> 8) & _MASK_8;
     bytes[2] = (word >> 16) & _MASK_8;
