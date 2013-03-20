@@ -75,11 +75,11 @@ class BLAKE2s implements Hash {
 
   _initialize() {
     // Initialize state.
-    _h = _IV.getRange(0, _IV.length);
+    _h = _IV.sublist(0, _IV.length);
     _t = [0, 0];
     _f = [0, 0];
-    _v = new List.fixedLength(_blockSizeInWords);
-    _currentBlockWords = new List.fixedLength(_blockSizeInWords);
+    _v = new List(_blockSizeInWords);
+    _currentBlockWords = new List(_blockSizeInWords);
     _pendingData = [];
 
     if (_digestLength < 1 || _digestLength > 32) {
@@ -102,8 +102,7 @@ class BLAKE2s implements Hash {
     }
 
     // Create parameter block.
-    var parameterBlock = new List.fixedLength(_h.length * _BYTES_PER_WORD,
-                                              fill: 0);
+    var parameterBlock = new List.filled(_h.length * _BYTES_PER_WORD, 0);
     parameterBlock[0] = digestLength;
     parameterBlock[1] = keyLength;
     if (_salt != null) {
@@ -136,7 +135,7 @@ class BLAKE2s implements Hash {
     }
 
     // XOR parameter block into initial chain value.
-    var paramWords = new List.fixedLength(_h.length, fill: 0);
+    var paramWords = new List.filled(_h.length, 0);
     _bytesToWords(parameterBlock, 0, paramWords, _h.length);
 
     for (int i = 0; i < _h.length; i++) {
@@ -145,7 +144,7 @@ class BLAKE2s implements Hash {
 
     if (_key != null) {
       // Process key.
-      var _paddedKey = new List.fixedLength(blockSize, fill: 0);
+      var _paddedKey = new List.filled(blockSize, 0);
       _paddedKey.setRange(0, keyLength, _key, 0);
       add(_paddedKey);
     }
@@ -227,7 +226,7 @@ class BLAKE2s implements Hash {
         _compressBlock();
       }
       var remaining = len - index;
-      _pendingData = _pendingData.getRange(index, remaining);
+      _pendingData = _pendingData.sublist(index, remaining);
     }
   }
 
@@ -252,7 +251,7 @@ class BLAKE2s implements Hash {
     for (var i = 0; i < _h.length; i++) {
       result.addAll(_wordToBytes(_h[i]));
     }
-    return result.getRange(0, _digestLength);
+    return result.sublist(0, _digestLength);
   }
 
   // Finish the hash computation and return the digest string.
@@ -281,7 +280,7 @@ class BLAKE2s implements Hash {
 
   // Convert a 32-bit word to four bytes (little endian).
   _wordToBytes(int word) {
-    List<int> bytes = new List.fixedLength(_BYTES_PER_WORD);
+    List<int> bytes = new List(_BYTES_PER_WORD);
     bytes[0] = (word >> 0) & _MASK_8;
     bytes[1] = (word >> 8) & _MASK_8;
     bytes[2] = (word >> 16) & _MASK_8;
