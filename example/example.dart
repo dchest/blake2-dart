@@ -1,5 +1,5 @@
-import 'dart:crypto';
 import 'dart:utf';
+import 'package:crypto/crypto.dart';
 import '../lib/blake2.dart';
 
 main() {

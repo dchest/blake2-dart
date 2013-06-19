@@ -5,8 +5,7 @@
 // worldwide. This software is distributed without any warranty.
 // http://creativecommons.org/publicdomain/zero/1.0/
 
-import 'dart:crypto';
-
+import 'package:crypto/crypto.dart';
 import 'package:unittest/unittest.dart';
 import '../lib/blake2.dart';
 
@@ -537,13 +536,13 @@ main() {
 
     for (var i = 0; i < golden.length; i++) {
       var h = new BLAKE2s();
-      h.add(input.getRange(0, i));
+      h.add(input.sublist(0, i));
       expect(CryptoUtils.bytesToHex(h.close()), golden[i]);
     }
 
     for (var i = 0; i < goldenKeyed.length; i++) {
-      var h = new BLAKE2s(key : input.getRange(0, 32));
-      h.add(input.getRange(0, i));
+      var h = new BLAKE2s(key : input.sublist(0, 32));
+      h.add(input.sublist(0, i));
       expect(CryptoUtils.bytesToHex(h.close()), goldenKeyed[i]);
     }
 

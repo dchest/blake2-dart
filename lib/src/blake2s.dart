@@ -7,16 +7,15 @@
 
 part of blake2;
 
+const _MASK_8 = 0xff;
+const _MASK_32 = 0xffffffff;
+const _BYTES_PER_WORD = 4;
+const _ROUNDS = 10;
+
 class BLAKE2s implements Hash {
 
-  const blockSize = 64;
-
-  const int _blockSizeInWords = 16;
-
-  const _MASK_8 = 0xff;
-  const _MASK_32 = 0xffffffff;
-  const _BYTES_PER_WORD = 4;
-  const _ROUNDS = 10;
+  final blockSize = 64;
+  final _blockSizeInWords = 16;
 
   // Hash state.
   List<int> _h; // chain
@@ -78,27 +77,27 @@ class BLAKE2s implements Hash {
     _h = _IV.sublist(0, _IV.length);
     _t = [0, 0];
     _f = [0, 0];
-    _v = new List(_blockSizeInWords);
+    _v = new List.filled(_blockSizeInWords, 0);
     _currentBlockWords = new List(_blockSizeInWords);
     _pendingData = [];
 
     if (_digestLength < 1 || _digestLength > 32) {
-      throw new HashException('Wrong digest length');
+      throw new ArgumentError('Wrong digest length');
     }
 
     var keyLength = _key == null ? 0 : _key.length;
     if (keyLength > 32) {
-      throw new HashException('Wrong key length');
+      throw new ArgumentError('Wrong key length');
     }
 
     var saltLength = _salt == null ? 0 : _salt.length;
     if (saltLength > 0 && saltLength != 8) {
-      throw new HashException('Wrong salt length');
+      throw new ArgumentError('Wrong salt length');
     }
 
     var personLength = _person == null ? 0 : _person.length;
     if (personLength > 0 && personLength != 8) {
-      throw new HashException('Wrong personalization length');
+      throw new ArgumentError('Wrong personalization length');
     }
 
     // Create parameter block.
@@ -106,10 +105,10 @@ class BLAKE2s implements Hash {
     parameterBlock[0] = digestLength;
     parameterBlock[1] = keyLength;
     if (_salt != null) {
-      parameterBlock.setRange(16, 8, _salt, 0);
+      parameterBlock.setRange(16, 16+8, _salt, 0);
     }
     if (_person != null) {
-      parameterBlock.setRange(24, 8, _person, 0);
+      parameterBlock.setRange(24, 24+8, _person, 0);
     }
     if (_tree != null) {
       parameterBlock[2] = _tree.fanout;
@@ -162,7 +161,7 @@ class BLAKE2s implements Hash {
 
   BLAKE2s add(List<int> data) {
     if (_digestCalled) {
-      throw new HashException('Hash add method called after close');
+      throw new StateError('Hash add method called after close');
     }
     _pendingData.addAll(data);
     _iterate();
@@ -173,7 +172,7 @@ class BLAKE2s implements Hash {
     // Copy state.
     _v.setRange(0, 8, _h);
     // Copy constants.
-    _v.setRange(8, 8, _IV);
+    _v.setRange(8, 16, _IV);
     // XOR counter.
     _v[12] ^= _t[0];
     _v[13] ^= _t[1];
@@ -226,7 +225,7 @@ class BLAKE2s implements Hash {
         _compressBlock();
       }
       var remaining = len - index;
-      _pendingData = _pendingData.sublist(index, remaining);
+      _pendingData = _pendingData.sublist(index, index + remaining);
     }
   }
 

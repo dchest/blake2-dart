@@ -5,7 +5,7 @@
 // worldwide. This software is distributed without any warranty.
 // http://creativecommons.org/publicdomain/zero/1.0/
 
-import 'dart:crypto';
+import 'package:crypto/crypto.dart';
 import '../lib/blake2.dart';
 
 const MEBIBYTE = 1024*1024;
@@ -18,7 +18,7 @@ measure(name, fn) {
 }
 
 measureHash(name, hash) {
-  var zeros = new List.fixedLength(128, fill: 0);
+  var zeros = new List.filled(128, 0);
   measure(name, () {
     var zlen = zeros.length;
     var i;

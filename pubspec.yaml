@@ -3,4 +3,5 @@ version: 0.1.0
 author: Dmitry Chestnykh
 description: BLAKE2s cryptographic hash function.
 dependencies:
+  crypto: any
   unittest: any

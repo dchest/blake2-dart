@@ -44,42 +44,42 @@ class HashTreeConfig {
 
   set fanout(int n) {
     if (n < 0 || n == 1 || n > 255) {
-      throw new HashException('Incorrect fanout');
+      throw new ArgumentError('Incorrect fanout');
     }
     _fanout = n;
   }
 
   set maxDepth(int n) {
     if (n < 2 || n > 255) {
-      throw new HashException('Incorrect maxDepth');
+      throw new ArgumentError('Incorrect maxDepth');
     }
     _maxDepth = n;
   }
 
   set leafSize(int n) {
     if (n < 0 || n > 0xffffffff) {
-      throw new HashException('Incorrect leafSize');
+      throw new ArgumentError('Incorrect leafSize');
     }
     _leafSize = n;
   }
 
   set nodeOffset(int n) {
     if (n < 0 || (_maxNodeOffset > 0 && n > _maxNodeOffset)) {
-      throw new HashException('Incorrect nodeOffset');
+      throw new ArgumentError('Incorrect nodeOffset');
     }
     _nodeOffset = n;
   }
 
   set nodeDepth(int n) {
     if (n < 0 || n > 255) {
-      throw new HashException('Incorrect nodeDepth');
+      throw new ArgumentError('Incorrect nodeDepth');
     }
     _nodeDepth = n;
   }
 
   set innerHashSize(int n) {
     if (n < 1 || n > _maxInnerHashSize) {
-      throw new HashException('Incorrect innerHashSize');
+      throw new ArgumentError('Incorrect innerHashSize');
     }
     _innerHashSize = n;
   }

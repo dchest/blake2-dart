@@ -7,7 +7,7 @@
 
 library blake2;
 
-import 'dart:crypto';
+import 'package:crypto/crypto.dart';
 
 part 'src/blake2s.dart';
 part 'src/tree.dart';
